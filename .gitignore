@@ -3,3 +3,8 @@
 /workspace.xml
 /.idea
 /target
+/allure-report
+/allure-results
+/Screenshots
+chromedriver.exe
+geckodriver.exe
