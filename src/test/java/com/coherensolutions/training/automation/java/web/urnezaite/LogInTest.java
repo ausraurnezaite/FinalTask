@@ -17,5 +17,6 @@ public class LogInTest extends BaseTest {
         softAssert.assertTrue(myAccountPage.isHeadingDisplayed(), "heading is not displayed");
         softAssert.assertTrue(myAccountPage.isCartButtonDisplayed(), "cart button is not displayed");
         softAssert.assertTrue(myAccountPage.isWishListButtonDisplayed(), "wishlist is not displayed");
+        softAssert.assertAll();
     }
 }
