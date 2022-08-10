@@ -31,6 +31,10 @@ public class MyAccountPage extends BasePage {
         return new WishlistPage(driver);
     }
 
+    public MainPage goToHomePage() {
+        homeButton.click();
+        return new MainPage(driver);
+    }
 
     public boolean isTitleCorrect() {
         return TITLE.equals(driver.getTitle());

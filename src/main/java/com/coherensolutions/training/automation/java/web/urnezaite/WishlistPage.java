@@ -87,7 +87,7 @@ public class WishlistPage extends BasePage {
 
     public boolean checkIfItemWasAddedToWishlist(String itemsName) {
         List<String> namesOfWishListItems = new ArrayList<>();
-        if (!isWishlistEmpty()) {//
+        if (!isWishlistEmpty()) {
             List<WebElement> wishlistItems = driver.findElements(By.cssSelector("ul.wlp_bought_list>li"));
             wishlistItems.forEach(item -> namesOfWishListItems.add(item.findElement(By.cssSelector("img")).getAttribute("alt")));
             System.out.println("items in selected list: ");

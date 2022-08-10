@@ -19,10 +19,10 @@ public class BaseTest {
         driver = DriverManager.getDriver();
     }
 
-    @AfterClass
-    public void cleanUp() {
-        driver.close();
-    }
+//    @AfterClass
+//    public void cleanUp() {
+//        driver.close();
+//    }
 
     public MyAccountPage logIn() {
         LogInPage logInPage = new LogInPage(driver);
