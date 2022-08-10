@@ -1,5 +1,7 @@
 package com.coherensolutions.training.automation.java.web.urnezaite;
 
+import com.coherensolutions.training.automation.java.web.urnezaite.factory.UserData;
+import com.coherensolutions.training.automation.java.web.urnezaite.factory.UserDataGenerator;
 import com.coherensolutions.training.automation.java.web.urnezaite.util.DriverManager;
 import com.coherensolutions.training.automation.java.web.urnezaite.util.PropertyProvider;
 import org.openqa.selenium.WebDriver;
@@ -8,12 +10,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class RegistrationPage extends DriverManager {
-    private WebDriver driver;
+public class RegistrationPage extends BasePage {
+      private final String PASSWORD = PropertyProvider.getProperty("password");
+    @FindBy(xpath = "//label[@for='id_gender1']")
+    private WebElement genderMRadio;
 
-    private final String PASSWORD = PropertyProvider.getProperty("password");
     @FindBy(xpath = "//label[@for='id_gender2']")
-    private WebElement genderRadio;
+    private WebElement genderFRadio;
 
     @FindBy(id = "customer_firstname")
     private WebElement firstNameInput;
@@ -43,23 +46,29 @@ public class RegistrationPage extends DriverManager {
     private WebElement registerButton;
 
     public RegistrationPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public MyAccountPage register() {
-        genderRadio.click();
-        firstNameInput.sendKeys("test");
-        lastNameInput.sendKeys("account");
+        UserData user = UserDataGenerator.generate();
+        System.out.println(user.getGender());
+        if (user.getGender() == 1) {
+            genderMRadio.click();
+        } else {
+            genderFRadio.click();
+        }
+        genderFRadio.click();
+        firstNameInput.sendKeys(user.getFirstName());
+        lastNameInput.sendKeys(user.getLastName());
         passwordInput.sendKeys(PASSWORD);
-        daysDropDawn.selectByValue("26");
-        monthsDropDawn.selectByValue("2");
-        yearsDropDawn.selectByValue("1992");
-        addressInput.sendKeys("testing street 1");
-        cityInput.sendKeys("testcity");
-        stateDropDawn.selectByVisibleText("Florida");
-        postalInput.sendKeys("12345");
-        phoneInput.sendKeys("+37062685556");
+        daysDropDawn.selectByValue(user.getBirthDay());
+        monthsDropDawn.selectByValue(user.getBirthMonth());
+        yearsDropDawn.selectByValue(user.getBirthYear());
+        addressInput.sendKeys(user.getStreetAndHouseNo());
+        cityInput.sendKeys(user.getCity());
+        stateDropDawn.selectByVisibleText(user.getState());
+        postalInput.sendKeys(user.getPostalCode());
+        phoneInput.sendKeys(user.getPhoneNo());
         registerButton.click();
         return new MyAccountPage(driver);
     }

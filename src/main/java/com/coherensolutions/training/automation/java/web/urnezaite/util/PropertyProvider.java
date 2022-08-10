@@ -7,9 +7,10 @@ import java.util.Properties;
 
 public class PropertyProvider {
     public static Properties properties;
+    private static final String PATH = "src/main/resources/test.properties";
 
     private static void loadProperties() {
-        try (InputStream input = new FileInputStream("src/main/resources/properties.properties")) {
+        try (InputStream input = new FileInputStream(PATH)) {
             properties = new Properties();
             properties.load(input);
         } catch (IOException ex) {

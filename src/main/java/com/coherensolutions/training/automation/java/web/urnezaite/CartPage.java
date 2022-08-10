@@ -6,19 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CartPage extends DriverManager {
-    private WebDriver driver;
-
-
-    private final String TITLE = "Order - My Store";
+public class CartPage extends BasePage{
 
     @FindBy(css = "a.home")
     private WebElement homeButton;
 
 
     public CartPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public MainPage goToHomePage() {

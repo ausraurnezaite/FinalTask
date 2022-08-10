@@ -1,8 +1,6 @@
 package com.coherensolutions.training.automation.java.web.urnezaite;
 
-import com.coherensolutions.training.automation.java.web.urnezaite.util.PropertyProvider;
 import io.qameta.allure.Description;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,12 +11,14 @@ public class RegisterTest extends BaseTest {
     public void testRegistration() {
 
         LogInPage logInPage = new LogInPage(driver);
-        logInPage.load();
-        RegistrationPage registrationPage = logInPage.createAccount();
+        logInPage.load(LOGIN_PAGE_LINK);
+        RegistrationPage registrationPage = logInPage.createAccount(USERNAME);
         MyAccountPage myAccountPage = registrationPage.register();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(myAccountPage.isHeadingDisplayed(), "heading is not displayed");
+        softAssert.assertTrue(USERNAME.equalsIgnoreCase(myAccountPage.getDisplayedAccountName()), "account name is not correct");
+        softAssert.assertTrue(myAccountPage.isTitleCorrect(), "title is not correct");
         softAssert.assertTrue(myAccountPage.isCartButtonDisplayed(), "cart button is not displayed");
         softAssert.assertTrue(myAccountPage.isWishListButtonDisplayed(), "wishlist button is not displayed");
+        softAssert.assertAll();
     }
 }

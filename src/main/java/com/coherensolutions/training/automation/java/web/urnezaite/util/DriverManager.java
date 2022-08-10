@@ -1,14 +1,17 @@
 package com.coherensolutions.training.automation.java.web.urnezaite.util;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
+
+import java.time.Duration;
 
 public class DriverManager {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     private static void initializeDriver() {
         TestRunStrategy strategy = getStrategy(PropertyProvider.getProperty("env"));
-        driver.set(strategy.initializeDriver(PropertyProvider.getProperty("browser")));
+        WebDriver webDriver = strategy.initializeDriver(PropertyProvider.getProperty("browser"));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.set(webDriver);
     }
 
     public static synchronized WebDriver getDriver() {
@@ -19,17 +22,12 @@ public class DriverManager {
     }
 
     private static TestRunStrategy getStrategy(String strategy) {
-        if (strategy.equalsIgnoreCase("local")) {
-            return new LocalStrategy();
+        if (strategy.equalsIgnoreCase("saucelabs")) {
+            return new SauceLabsStrategy();
+        } else if (strategy.equalsIgnoreCase("grid")) {
+            return new GridStrategy();
         }
-        return new SauceLabsStrategy();
+        System.out.println();
+        return new LocalStrategy();
     }
 }
-
-//    public static void setDriverToContext(ITestContext iTestContext, WebDriver driver) {
-//        iTestContext.setAttribute("WebDriver", driver);
-//    }
-//
-//    public static WebDriver getDriverFromContext(ITestContext iTestContext) {
-//        return (WebDriver) iTestContext.getAttribute("WebDriver");
-//    }

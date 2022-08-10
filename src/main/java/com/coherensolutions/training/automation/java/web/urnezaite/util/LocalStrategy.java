@@ -19,7 +19,6 @@ public class LocalStrategy implements TestRunStrategy {
             driver = new ChromeDriver();
             WebDriverManager.chromedriver().setup();
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         return driver;
     }

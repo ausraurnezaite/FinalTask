@@ -1,0 +1,73 @@
+package com.coherensolutions.training.automation.java.web.urnezaite.factory;
+
+import com.github.javafaker.Faker;
+
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+public class UserDataGenerator {
+    private static UserData userData;
+    private static Faker faker = new Faker();
+    private static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    private static String[] date = sdf.format(faker.date().birthday(18, 100)).split("/");
+
+    public static UserData generate() {
+        return userData = new UserData.Builder()
+                .gender(getRandomGender())
+                .firstName(getRandomFirstName())
+                .lastName(getRandomLastName())
+                .birthDay(getRandomBirthDay())
+                .birthMonth(getRandomBirthMonth())
+                .birthYear(getRandomBirthYear())
+                .streetAndHouseNo(getRandomAddress())
+                .city(getRandomCity())
+                .state(getRandomState())
+                .postalCode(getRandomPostalCode())
+                .phoneNo(getRandomPhoneNo())
+                .build();
+    }
+
+    private static int getRandomGender() {
+        return faker.random().nextInt(1, 2);
+    }
+
+    private static String getRandomFirstName() {
+        return faker.name().firstName();
+    }
+
+    private static String getRandomLastName() {
+        return faker.name().lastName();
+    }
+
+    private static String getRandomBirthDay() {
+        return date[0];
+    }
+
+    private static String getRandomBirthMonth() {
+        return date[1];
+    }
+
+    private static String getRandomBirthYear() {
+        return date[2];
+    }
+
+    private static String getRandomAddress() {
+        return faker.address().streetAddress();
+    }
+
+    private static String getRandomCity() {
+        return faker.address().city();
+    }
+
+    private static String getRandomState() {
+        return faker.address().state();
+    }
+
+    private static String getRandomPostalCode() {
+        return faker.address().zipCode();
+    }
+
+    private static String getRandomPhoneNo() {
+        return faker.phoneNumber().cellPhone();
+    }
+}

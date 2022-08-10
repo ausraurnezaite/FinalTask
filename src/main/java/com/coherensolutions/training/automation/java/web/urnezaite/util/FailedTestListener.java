@@ -1,7 +1,5 @@
 package com.coherensolutions.training.automation.java.web.urnezaite.util;
 
-import com.google.common.collect.ImmutableMap;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -55,8 +53,8 @@ public class FailedTestListener implements IInvokedMethodListener {
         Allure.addAttachment("Time", now.format(dtf));
         Allure.addAttachment("Browser", PropertyProvider.getProperty("browser"));
         if (!PropertyProvider.getProperty("env").equalsIgnoreCase("local")) {
-            Allure.addAttachment("Browser.Version", PropertyProvider.getProperty("saucelabs.browserversion"));
-            Allure.addAttachment("Platform", PropertyProvider.getProperty("saucelabs.platform"));
+            Allure.addAttachment("Browser.Version", PropertyProvider.getProperty("saucelabs.chrome.browser.version"));
+            Allure.addAttachment("Platform", PropertyProvider.getProperty("saucelabs.chrome.browser.platform"));
         }
     }
 }

@@ -7,11 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LogInPage extends DriverManager {
-    private WebDriver driver;
-    private final String USERNAME = PropertyProvider.getProperty("username");
-    private final String PASSWORD = PropertyProvider.getProperty("password");
-    private final String LOGIN_PAGE_LINK = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+public class LogInPage extends BasePage {
     @FindBy(id = "email_create")
     private WebElement emailCreateInput;
 
@@ -27,24 +23,23 @@ public class LogInPage extends DriverManager {
     private WebElement loginButton;
 
     public LogInPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
-    public void load() {
-        driver.get(LOGIN_PAGE_LINK);
+    public void load(String link) {
+        driver.get(link);
     }
 
-    public RegistrationPage createAccount() {
-        emailCreateInput.sendKeys(USERNAME);
+    public RegistrationPage createAccount(String username) {
+        emailCreateInput.sendKeys(username);
         createAccountButton.click();
         return new RegistrationPage(driver);
     }
 
-    public MyAccountPage logIn() {
-        usernameInput.sendKeys(USERNAME);
+    public MyAccountPage logIn(String username, String password) {
+        usernameInput.sendKeys(username);
         loginButton.click();
-        passwordInput.sendKeys(PASSWORD);
+        passwordInput.sendKeys(password);
         loginButton.click();
         return new MyAccountPage(driver);
     }
