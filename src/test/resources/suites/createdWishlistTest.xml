@@ -4,7 +4,7 @@
     <test preserve-order="true"
           name="Created Wishlist Test">
         <classes>
-            <class name="com.coherensolutions.training.automation.java.web.urnezaite.CreatedWishlistTest"/>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.CreatedWishlistTest"/>
         </classes>
     </test>
 </suite>

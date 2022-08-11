@@ -3,7 +3,7 @@
 <suite name="Create Account">
     <test name="Create Account Test">
         <classes>
-            <class name="com.coherensolutions.training.automation.java.web.urnezaite.RegisterTest"/>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.RegisterTest"/>
         </classes>
     </test>
 </suite>

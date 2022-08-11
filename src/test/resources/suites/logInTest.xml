@@ -3,7 +3,7 @@
 <suite name="Log in">
     <test name="Log In Test">
         <classes>
-            <class name="com.coherensolutions.training.automation.java.web.urnezaite.LogInTest"/>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.LogInTest"/>
         </classes>
     </test>
 </suite>

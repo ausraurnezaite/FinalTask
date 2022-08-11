@@ -3,7 +3,7 @@
 <suite name="Auto-created Wishlist">
     <test name="Auto-created  Wishlist Test">
         <classes>
-            <class name="com.coherensolutions.training.automation.java.web.urnezaite.AutoWishlistTest"/>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.AutoWishlistTest"/>
         </classes>
     </test>
 </suite>

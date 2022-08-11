@@ -4,7 +4,7 @@
     <test verbose="2"
           name="Cart Test">
         <classes>
-            <class name="com.coherensolutions.training.automation.java.web.urnezaite.CartTest"/>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.CartTest"/>
         </classes>
     </test>
 </suite>
