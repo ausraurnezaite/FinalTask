@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegistrationPage extends BasePage {
-      private final String PASSWORD = PropertyProvider.getProperty("password");
     @FindBy(xpath = "//label[@for='id_gender1']")
     private WebElement genderMRadio;
 
@@ -26,18 +25,18 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(id = "passwd")
     private WebElement passwordInput;
-    @FindBy(id = "days")
-    private Select daysDropDawn;
-    @FindBy(id = "months")
-    private Select monthsDropDawn;
-    @FindBy(id = "years")
-    private Select yearsDropDawn;
+    @FindBy(css = "select#days")
+    private WebElement selectDay;
+    @FindBy(css = "select#months")
+    private WebElement selectMonth;
+    @FindBy(css = "select#years")
+    private WebElement selectYear;
     @FindBy(id = "address1")
     private WebElement addressInput;
     @FindBy(id = "city")
     private WebElement cityInput;
     @FindBy(id = "id_state")
-    private Select stateDropDawn;
+    private WebElement selectState;
     @FindBy(id = "postcode")
     private WebElement postalInput;
     @FindBy(id = "phone_mobile")
@@ -49,9 +48,10 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
-    public MyAccountPage register() {
+    public MyAccountPage register(String password) {
         UserData user = UserDataGenerator.generate();
-        System.out.println(user.getGender());
+        System.out.println(user);
+
         if (user.getGender() == 1) {
             genderMRadio.click();
         } else {
@@ -60,13 +60,23 @@ public class RegistrationPage extends BasePage {
         genderFRadio.click();
         firstNameInput.sendKeys(user.getFirstName());
         lastNameInput.sendKeys(user.getLastName());
-        passwordInput.sendKeys(PASSWORD);
+        passwordInput.sendKeys(password);
+
+        Select daysDropDawn = new Select(selectDay);
         daysDropDawn.selectByValue(user.getBirthDay());
+
+        Select monthsDropDawn = new Select(selectMonth);
         monthsDropDawn.selectByValue(user.getBirthMonth());
+
+        Select yearsDropDawn = new Select(selectYear);
         yearsDropDawn.selectByValue(user.getBirthYear());
+
         addressInput.sendKeys(user.getStreetAndHouseNo());
         cityInput.sendKeys(user.getCity());
+
+        Select stateDropDawn = new Select(selectState);
         stateDropDawn.selectByVisibleText(user.getState());
+
         postalInput.sendKeys(user.getPostalCode());
         phoneInput.sendKeys(user.getPhoneNo());
         registerButton.click();

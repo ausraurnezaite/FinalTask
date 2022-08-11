@@ -17,7 +17,7 @@ public class LogInTest extends BaseTest {
         softAssert.assertTrue(myAccountPage.isTitleCorrect(), "title is not correct");
         softAssert.assertTrue(myAccountPage.isCartButtonDisplayed(), "cart button is not displayed");
         softAssert.assertTrue(myAccountPage.isWishListButtonDisplayed(), "wishlist button is not displayed");
-        softAssert.assertTrue(USERNAME.equalsIgnoreCase(myAccountPage.getDisplayedAccountName()), "account name is not correct");
+        softAssert.assertTrue(myAccountPage.isUsersNameDisplayed(), "users full name is not displayed");
         softAssert.assertAll();
     }
 }

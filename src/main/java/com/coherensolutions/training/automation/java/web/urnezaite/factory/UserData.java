@@ -9,7 +9,6 @@ public class UserData {
     private String birthMonth;
     private String birthYear;
     private String streetAndHouseNo;
-    private String houseNo;
     private String city;
     private String state;
     private String postalCode;
@@ -148,10 +147,6 @@ public class UserData {
         return postalCode;
     }
 
-    public String getHouseNo() {
-        return houseNo;
-    }
-
     public String getPhoneNo() {
         return phoneNo;
     }
@@ -166,7 +161,6 @@ public class UserData {
                 ", birthMonth='" + birthMonth + '\'' +
                 ", birthYear='" + birthYear + '\'' +
                 ", streetName='" + streetAndHouseNo + '\'' +
-                ", houseNo='" + houseNo + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", postalCode='" + postalCode + '\'' +

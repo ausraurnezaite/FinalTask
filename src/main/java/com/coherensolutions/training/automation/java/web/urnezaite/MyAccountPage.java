@@ -3,7 +3,6 @@ package com.coherensolutions.training.automation.java.web.urnezaite;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class MyAccountPage extends BasePage {
 
@@ -13,7 +12,7 @@ public class MyAccountPage extends BasePage {
     private WebElement myPersonalInformationButton;
 
     @FindBy(css = "a.account>span")
-    private WebElement accountName;
+    private WebElement usersName;
 
     @FindBy(xpath = "//a[@title = 'My wishlists']")
     private WebElement wishListButton;
@@ -48,7 +47,7 @@ public class MyAccountPage extends BasePage {
         return wishListButton.isDisplayed();
     }
 
-    public String getDisplayedAccountName() {
-        return accountName.getText();
+    public boolean isUsersNameDisplayed() {
+        return usersName.isDisplayed();
     }
 }
