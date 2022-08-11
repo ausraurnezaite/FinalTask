@@ -1,7 +1,7 @@
 package com.coherensolutions.training.automation.java.web.urnezaite;
 
-import com.coherensolutions.training.automation.java.web.urnezaite.factory.UserData;
-import com.coherensolutions.training.automation.java.web.urnezaite.factory.UserDataGenerator;
+import com.coherensolutions.training.automation.java.web.urnezaite.user.UserData;
+import com.coherensolutions.training.automation.java.web.urnezaite.user.UserDataGenerator;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;

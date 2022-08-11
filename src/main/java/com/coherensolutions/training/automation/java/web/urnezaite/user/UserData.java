@@ -1,4 +1,4 @@
-package com.coherensolutions.training.automation.java.web.urnezaite.factory;
+package com.coherensolutions.training.automation.java.web.urnezaite.user;
 
 
 public class UserData {

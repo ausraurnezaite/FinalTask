@@ -1,13 +1,9 @@
 package com.coherensolutions.training.automation.java.web.urnezaite;
 
-import com.coherensolutions.training.automation.java.web.urnezaite.factory.UserData;
-import com.coherensolutions.training.automation.java.web.urnezaite.factory.UserDataGenerator;
-import com.coherensolutions.training.automation.java.web.urnezaite.util.DriverManager;
-import com.coherensolutions.training.automation.java.web.urnezaite.util.PropertyProvider;
+import com.coherensolutions.training.automation.java.web.urnezaite.user.UserData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegistrationPage extends BasePage {

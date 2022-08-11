@@ -1,9 +1,8 @@
-package com.coherensolutions.training.automation.java.web.urnezaite.factory;
+package com.coherensolutions.training.automation.java.web.urnezaite.user;
 
 import com.github.javafaker.Faker;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 public class UserDataGenerator {
     private static UserData userData;
