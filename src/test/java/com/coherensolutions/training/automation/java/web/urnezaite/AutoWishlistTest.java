@@ -17,7 +17,8 @@ public class AutoWishlistTest extends BaseTest {
         }
         MainPage mainPage = wishlistPage.goToHomePage();
         ItemPage itemPage = mainPage.selectRandomItem();
-        String itemAddedToWishListName = itemPage.addToWishlist();
+        String itemAddedToWishListName = itemPage.getItemsName();
+        itemPage.addToWishlist();
         wishlistPage = itemPage.goToMyAccountPage().goToWishListPage();
         wishlistPage.showList();
         Assert.assertTrue(wishlistPage.checkIfItemWasAddedToWishlist(itemAddedToWishListName), "item was not added to wishlist");

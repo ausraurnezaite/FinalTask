@@ -21,7 +21,8 @@ public class CartTest extends BaseTest {
         while (itemsAddedToCart.size() != 3) {
             ItemPage itemPage = mainPage.selectRandomItem();
             if (!itemsAddedToCart.contains(itemPage.getItemsReference())) {
-                String itemAddedToCart = itemPage.addToCart();
+                String itemAddedToCart = itemPage.getItemsReference();
+                itemPage.addToCart();
                 itemsAddedToCart.add(itemAddedToCart);
                 mainPage = itemPage.goToHomePage();
             }

@@ -18,16 +18,31 @@ public class WishlistPage extends BasePage {
 
     @FindBy(id = "name")
     WebElement newWishlistNameInput;
+
     @FindBy(id = "submitWishlist")
     WebElement saveWishlist;
 
-    @FindBy(id = "mywishlist")
-    private WebElement wishlistArea;
 
-    String defaultWishlistName = "My wishlist";
+    @FindBy(css = "table tr")
+    List<WebElement> wishlistLists;
+
+    @FindBy(css = "ul.wlp_bought_list>li img")
+    List<WebElement> wishlistItems;
+
+    @FindBy(css = "td.wishlist_delete>a.icon")
+    WebElement deleteWishlistIcon;
+
+    private final By deleteWishlistIconSelector = By.cssSelector("td.wishlist_delete>a.icon");
+
+    private final String DEFAULT_WISHLIST_NAME = "My wishlist";
+
+    List<String> namesOfWishListItems = new ArrayList<>();
+
+    public boolean wishlistEmpty;
 
     public WishlistPage(WebDriver driver) {
         super(driver);
+        wishlistEmpty = wishlistLists.size() == 0;
     }
 
     public MainPage goToHomePage() {
@@ -40,37 +55,19 @@ public class WishlistPage extends BasePage {
         return new CartPage(driver);
     }
 
-    public LogInPage logout() {
-        logOutButton.click();
-        return new LogInPage(driver);
-    }
-
     public boolean isWishlistEmpty() {
-        List<WebElement> wishListElements = wishlistArea.findElements(By.cssSelector("table"));
-        return wishListElements.size() == 0;
+        return wishlistEmpty;
     }
 
     public void removeAllLists() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
-        int numberOfLists = driver.findElements(By.cssSelector("td.wishlist_delete>a.icon")).size();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        int numberOfLists = wishlistLists.size();
         for (int i = numberOfLists; i > 0; i--) {
-            WebElement wishlistDeleteIcon = driver.findElement(By.cssSelector("td.wishlist_delete>a.icon"));
-            wishlistDeleteIcon.click();
+            deleteWishlistIcon.click();
             wait.until(ExpectedConditions.alertIsPresent()).accept();
-            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.cssSelector("td.wishlist_delete>a.icon"), i));
+            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(deleteWishlistIconSelector, i));
         }
     }
-
-
-//    public void removeAllLists() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//        while (!isWishlistEmpty()) {
-//            WebElement wishlistDeleteIcon = driver.findElement(By.cssSelector("td.wishlist_delete>a.icon"));
-//            wishlistDeleteIcon.click();
-//            wait.until(ExpectedConditions.alertIsPresent()).accept();
-////          driver.navigate().refresh();
-//        }
-//    }
 
     public void createNewWishlist(String wishlistName) {
         newWishlistNameInput.sendKeys(wishlistName);
@@ -78,18 +75,16 @@ public class WishlistPage extends BasePage {
     }
 
     public void showCreatedList(String wishlistName) {
-        driver.findElement(By.xpath("//a[contains(text(), '" + wishlistName + "')]")).click();
+        driver.findElement(By.xpath(String.format("//a[contains(text(), '%s')]", wishlistName))).click();
     }
 
     public void showList() {
-        driver.findElement(By.xpath("//a[contains(text(), '" + defaultWishlistName + "')]")).click();
+        driver.findElement(By.xpath(String.format("//a[contains(text(), '%s')]", DEFAULT_WISHLIST_NAME))).click();
     }
 
     public boolean checkIfItemWasAddedToWishlist(String itemsName) {
-        List<String> namesOfWishListItems = new ArrayList<>();
-        if (!isWishlistEmpty()) {
-            List<WebElement> wishlistItems = driver.findElements(By.cssSelector("ul.wlp_bought_list>li"));
-            wishlistItems.forEach(item -> namesOfWishListItems.add(item.findElement(By.cssSelector("img")).getAttribute("alt")));
+        if (!wishlistEmpty) {
+            wishlistItems.forEach(item -> namesOfWishListItems.add(item.getAttribute("alt")));
             System.out.println("items in selected list: ");
             namesOfWishListItems.forEach(System.out::println);
         }

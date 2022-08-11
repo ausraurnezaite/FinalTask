@@ -10,9 +10,9 @@ import org.testng.annotations.Listeners;
 @Listeners({FailedTestListener.class})
 public class BaseTest {
     public WebDriver driver;
-    final String USERNAME = PropertyProvider.getProperty("username");
-    final String PASSWORD = System.getenv("TEST_PASSWORD");
-    final String LOGIN_PAGE_LINK = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+    protected final static String USERNAME = PropertyProvider.getProperty("username");
+    protected final static String PASSWORD = System.getenv("TEST_PASSWORD");
+    protected final static String LOGIN_PAGE_LINK = PropertyProvider.getProperty("loginPageLink");
 
     @BeforeClass
     public void setUp(ITestContext context) {

@@ -5,6 +5,7 @@ public class UserData {
     private int gender;
     private String firstName;
     private String lastName;
+    private String password;
     private String birthDay;
     private String birthMonth;
     private String birthYear;
@@ -19,6 +20,7 @@ public class UserData {
         private int gender;
         private String firstName;
         private String lastName;
+        private String password;
         private String birthDay;
         private String birthMonth;
         private String birthYear;
@@ -43,6 +45,11 @@ public class UserData {
 
         public Builder lastName(String lastName) {
             this.lastName = lastName;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
             return this;
         }
 
@@ -92,6 +99,7 @@ public class UserData {
             user.gender = gender;
             user.firstName = firstName;
             user.lastName = lastName;
+            user.password = password;
             user.birthDay = birthDay;
             user.birthMonth = birthMonth;
             user.birthYear = birthYear;
@@ -117,6 +125,10 @@ public class UserData {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getBirthDay() {

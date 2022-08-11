@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class MyAccountPage extends BasePage {
 
-    private final String TITLE = "My account - My Store";
+    private static final String TITLE = "My account - My Store";
 
     @FindBy(xpath = "//a[@title = 'Information']")
     private WebElement myPersonalInformationButton;

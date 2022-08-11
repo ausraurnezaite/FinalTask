@@ -25,22 +25,31 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(id = "passwd")
     private WebElement passwordInput;
+
     @FindBy(css = "select#days")
     private WebElement selectDay;
+
     @FindBy(css = "select#months")
     private WebElement selectMonth;
+
     @FindBy(css = "select#years")
     private WebElement selectYear;
+
     @FindBy(id = "address1")
     private WebElement addressInput;
+
     @FindBy(id = "city")
     private WebElement cityInput;
+
     @FindBy(id = "id_state")
     private WebElement selectState;
+
     @FindBy(id = "postcode")
     private WebElement postalInput;
+
     @FindBy(id = "phone_mobile")
     private WebElement phoneInput;
+
     @FindBy(id = "submitAccount")
     private WebElement registerButton;
 
@@ -48,8 +57,7 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
-    public MyAccountPage register(String password) {
-        UserData user = UserDataGenerator.generate();
+    public MyAccountPage register(UserData user) {
         System.out.println(user);
 
         if (user.getGender() == 1) {
@@ -57,10 +65,11 @@ public class RegistrationPage extends BasePage {
         } else {
             genderFRadio.click();
         }
+
         genderFRadio.click();
         firstNameInput.sendKeys(user.getFirstName());
         lastNameInput.sendKeys(user.getLastName());
-        passwordInput.sendKeys(password);
+        passwordInput.sendKeys(user.getPassword());
 
         Select daysDropDawn = new Select(selectDay);
         daysDropDawn.selectByValue(user.getBirthDay());
@@ -80,6 +89,7 @@ public class RegistrationPage extends BasePage {
         postalInput.sendKeys(user.getPostalCode());
         phoneInput.sendKeys(user.getPhoneNo());
         registerButton.click();
+
         return new MyAccountPage(driver);
     }
 }

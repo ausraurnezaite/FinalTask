@@ -15,11 +15,12 @@ public class CreatedWishlistTest extends BaseTest {
         wishlistPage.createNewWishlist(WISHLIST_NAME);
         MainPage mainPage = wishlistPage.goToHomePage();
         ItemPage itemPage = mainPage.selectRandomItem();
-        String itemsAddedToWishlistName = itemPage.addToWishlist();
+        String itemAddedToWishlistName = itemPage.getItemsName();
+        itemPage.addToWishlist();
         wishlistPage = itemPage.goToMyAccountPage().goToWishListPage();
         wishlistPage.showCreatedList(WISHLIST_NAME);
 
-        Assert.assertTrue(wishlistPage.checkIfItemWasAddedToWishlist(itemsAddedToWishlistName), "item was not added to created wishlist");
+        Assert.assertTrue(wishlistPage.checkIfItemWasAddedToWishlist(itemAddedToWishlistName), "item was not added to created wishlist");
     }
 
     @Test
@@ -28,14 +29,15 @@ public class CreatedWishlistTest extends BaseTest {
 
         WishlistPage wishlistPage = new WishlistPage(driver);
 
-        if (!wishlistPage.isWishlistEmpty()) {
+        if (wishlistPage.isWishlistEmpty()) {
             wishlistPage.removeAllLists();
         }
 
         wishlistPage.createNewWishlist(WISHLIST_NAME);
         MainPage mainPage = wishlistPage.goToHomePage();
         ItemPage itemPage = mainPage.selectRandomItem();
-        String itemsAddedToWishlistName = itemPage.addToWishlist();
+        String itemsAddedToWishlistName = itemPage.getItemsName();
+        itemPage.addToWishlist();
         wishlistPage = itemPage.goToMyAccountPage().goToWishListPage();
         wishlistPage.showCreatedList(WISHLIST_NAME);
 

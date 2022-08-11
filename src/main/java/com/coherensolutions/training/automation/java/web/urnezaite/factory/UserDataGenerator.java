@@ -16,6 +16,7 @@ public class UserDataGenerator {
                 .gender(getRandomGender())
                 .firstName(getRandomFirstName())
                 .lastName(getRandomLastName())
+                .password(System.getenv("TEST_PASSWORD"))
                 .birthDay(getRandomBirthDay())
                 .birthMonth(getRandomBirthMonth())
                 .birthYear(getRandomBirthYear())

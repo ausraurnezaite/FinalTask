@@ -27,6 +27,9 @@ public class MainPage extends BasePage {
     @FindBy(css = "ul.product_list")
     private WebElement products;
 
+    @FindBy(css = "ul#homefeatured>li")
+    private List<WebElement> productsList;
+
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -48,8 +51,8 @@ public class MainPage extends BasePage {
     }
 
     public ItemPage selectRandomItem() {
-        Integer random = new Faker().random().nextInt(1, products.findElements(By.cssSelector("li")).size());
-        WebElement randomItem = products.findElement(By.xpath("//li[" + random + "]//a[@class='product-name']"));
+        Integer random = new Faker().random().nextInt(1, productsList.size());
+        WebElement randomItem = products.findElement(By.xpath(String.format("//li[%s]//a[@class='product-name']", random)));
         randomItem.click();
         return new ItemPage(driver);
     }

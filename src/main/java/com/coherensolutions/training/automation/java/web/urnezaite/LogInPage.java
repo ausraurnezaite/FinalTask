@@ -1,11 +1,8 @@
 package com.coherensolutions.training.automation.java.web.urnezaite;
 
-import com.coherensolutions.training.automation.java.web.urnezaite.util.DriverManager;
-import com.coherensolutions.training.automation.java.web.urnezaite.util.PropertyProvider;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class LogInPage extends BasePage {
     @FindBy(id = "email_create")
@@ -19,6 +16,7 @@ public class LogInPage extends BasePage {
 
     @FindBy(id = "passwd")
     private WebElement passwordInput;
+
     @FindBy(id = "SubmitLogin")
     private WebElement loginButton;
 
