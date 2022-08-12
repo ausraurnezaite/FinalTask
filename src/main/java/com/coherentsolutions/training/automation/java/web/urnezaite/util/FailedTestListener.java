@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FailedTestListener implements IInvokedMethodListener {
     public static String screenshotsSubFolderName;
-    private static final Logger logger = LogManager.getLogger(FailedTestListener.class);
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult, ITestContext context) {

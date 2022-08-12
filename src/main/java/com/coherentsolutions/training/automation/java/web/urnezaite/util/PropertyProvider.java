@@ -12,7 +12,7 @@ import java.util.Properties;
 public class PropertyProvider {
     public static Properties properties;
     private static final String PATH = "src/main/resources/test.properties";
-    private static final Logger logger = LogManager.getLogger(PropertyProvider.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private static void loadProperties() {
         try (InputStream input = new FileInputStream(PATH)) {

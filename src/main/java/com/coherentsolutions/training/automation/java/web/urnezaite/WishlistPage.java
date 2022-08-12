@@ -35,7 +35,7 @@ public class WishlistPage extends BasePage {
 
     private final String DEFAULT_WISHLIST_NAME = "My wishlist";
 
-    private static final Logger logger = LogManager.getLogger(WishlistPage.class);
+    private static final Logger logger = LogManager.getLogger();
 
     public WishlistPage(WebDriver driver) {
         super(driver);

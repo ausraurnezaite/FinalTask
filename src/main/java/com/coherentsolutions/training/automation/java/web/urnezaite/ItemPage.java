@@ -33,7 +33,7 @@ public class ItemPage extends BasePage {
     @FindBy(css = "p#product_reference>span")
     private WebElement itemsReferenceElement;
 
-    private static final Logger logger = LogManager.getLogger(ItemPage.class);
+    private static final Logger logger = LogManager.getLogger();
 
     public ItemPage(WebDriver driver) {
         super(driver);

@@ -17,7 +17,7 @@ public class CartPage extends BasePage {
     @FindBy(css = "td.cart_description small.cart_ref")
     private List<WebElement> cartItems;
 
-    private static final Logger logger = LogManager.getLogger(CartPage.class);
+    private static final Logger logger = LogManager.getLogger();
 
     public CartPage(WebDriver driver) {
         super(driver);
