@@ -24,7 +24,6 @@ public class WishlistPage extends BasePage {
     @FindBy(id = "submitWishlist")
     private WebElement saveWishlist;
 
-
     @FindBy(css = "table tr")
     private List<WebElement> wishlists;
 
@@ -35,7 +34,8 @@ public class WishlistPage extends BasePage {
     private List<WebElement> deleteWishlistIcons;
 
     private final String DEFAULT_WISHLIST_NAME = "My wishlist";
-    private final Logger logger = LogManager.getLogger(WishlistPage.class);
+
+    private static final Logger logger = LogManager.getLogger(WishlistPage.class);
 
     public WishlistPage(WebDriver driver) {
         super(driver);

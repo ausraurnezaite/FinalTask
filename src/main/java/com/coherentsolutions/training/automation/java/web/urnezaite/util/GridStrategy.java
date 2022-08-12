@@ -15,7 +15,7 @@ import java.net.URL;
 public class GridStrategy implements TestRunStrategy {
     private WebDriver driver;
     private DesiredCapabilities capabilities = new DesiredCapabilities();
-    private final Logger logger = LogManager.getLogger(GridStrategy.class);
+    private static final Logger logger = LogManager.getLogger(GridStrategy.class);
 
 
     @Override

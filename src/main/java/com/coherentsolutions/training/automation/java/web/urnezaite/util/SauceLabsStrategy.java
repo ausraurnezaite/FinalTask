@@ -17,7 +17,7 @@ public class SauceLabsStrategy implements TestRunStrategy {
     private WebDriver driver;
     private MutableCapabilities sauceOptions = new MutableCapabilities();
     private DesiredCapabilities capabilities = new DesiredCapabilities();
-    private final Logger logger = LogManager.getLogger(SauceLabsStrategy.class);
+    private static final Logger logger = LogManager.getLogger(SauceLabsStrategy.class);
 
 
     @Override

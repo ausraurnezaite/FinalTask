@@ -12,9 +12,6 @@ import java.time.Duration;
 
 public class ItemPage extends BasePage {
 
-    @FindBy(xpath = "//a[@title = 'View my customer account']")
-    private WebElement myAccountButton;
-
     @FindBy(css = "a.home")
     private WebElement homeButton;
 
@@ -36,8 +33,7 @@ public class ItemPage extends BasePage {
     @FindBy(css = "p#product_reference>span")
     private WebElement itemsReferenceElement;
 
-    private final Logger logger = LogManager.getLogger(ItemPage.class);
-
+    private static final Logger logger = LogManager.getLogger(ItemPage.class);
 
     public ItemPage(WebDriver driver) {
         super(driver);

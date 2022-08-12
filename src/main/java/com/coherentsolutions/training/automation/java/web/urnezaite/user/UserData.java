@@ -167,7 +167,7 @@ public class UserData {
     public String toString() {
         return "UserData: " +
                 "gender= '" + gender + '\'' +
-                ", firstName= ' " + firstName + '\'' +
+                ", firstName= '" + firstName + '\'' +
                 ", lastName= '" + lastName + '\'' +
                 ", birthDay= '" + birthDay + '\'' +
                 ", birthMonth= '" + birthMonth + '\'' +

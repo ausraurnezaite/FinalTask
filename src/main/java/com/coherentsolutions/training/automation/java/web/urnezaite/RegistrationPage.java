@@ -51,7 +51,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "submitAccount")
     private WebElement registerButton;
 
-    private final Logger logger = LogManager.getLogger(RegistrationPage.class);
+    private static final Logger logger = LogManager.getLogger(RegistrationPage.class);
 
     public RegistrationPage(WebDriver driver) {
         super(driver);

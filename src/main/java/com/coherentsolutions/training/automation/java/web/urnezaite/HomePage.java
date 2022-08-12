@@ -9,9 +9,6 @@ import java.util.Random;
 
 public class HomePage extends BasePage {
 
-    @FindBy(xpath = "//a[@title = 'View my customer account']")
-    private WebElement myAccountButton;
-
     @FindBy(css = "ul#homefeatured>li a.product-name")
     private List<WebElement> productsList;
 
@@ -22,11 +19,6 @@ public class HomePage extends BasePage {
     public CartPage goToCartPage() {
         cartButton.click();
         return new CartPage(driver);
-    }
-
-    public MyAccountPage goToMyAccountPage() {
-        myAccountButton.click();
-        return new MyAccountPage(driver);
     }
 
     public LogInPage logout() {

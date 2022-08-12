@@ -8,9 +8,6 @@ public class MyAccountPage extends BasePage {
 
     private static final String TITLE = "My account - My Store";
 
-    @FindBy(xpath = "//a[@title = 'Information']")
-    private WebElement myPersonalInformationButton;
-
     @FindBy(css = "a.account>span")
     private WebElement usersName;
 
@@ -19,7 +16,6 @@ public class MyAccountPage extends BasePage {
 
     @FindBy(css = "a.home")
     private WebElement homeButton;
-
 
     public MyAccountPage(WebDriver driver) {
         super(driver);
