@@ -1,6 +1,7 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite;
 
-import com.coherentsolutions.training.automation.java.web.urnezaite.util.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,24 +15,23 @@ public class CartPage extends BasePage {
     private WebElement homeButton;
 
     @FindBy(css = "td.cart_description small.cart_ref")
-    List<WebElement> cartItems;
+    private List<WebElement> cartItems;
 
-
-    private List<String> namesOfItemsInCart = new ArrayList<>();
-
+    private final Logger logger = LogManager.getLogger(CartPage.class);
 
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
-    public MainPage goToHomePage() {
+    public HomePage goToHomePage() {
         homeButton.click();
-        return new MainPage(driver);
+        return new HomePage(driver);
     }
 
-    public boolean checkIfItemsWereAddedToCart(List<String> itemsAddedToCart) {
+    public boolean isItemsInCart(List<String> itemsAddedToCart) {
+        List<String> namesOfItemsInCart = new ArrayList<>();
         cartItems.forEach(item -> namesOfItemsInCart.add(item.getText().replace("SKU : ", "")));
-        Log.info("items in cart: " + namesOfItemsInCart);
+        logger.info("items in cart: " + namesOfItemsInCart);
         return namesOfItemsInCart.containsAll(itemsAddedToCart);
     }
 }

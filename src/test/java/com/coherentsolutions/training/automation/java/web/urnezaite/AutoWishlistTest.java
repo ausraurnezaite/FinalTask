@@ -15,12 +15,12 @@ public class AutoWishlistTest extends BaseTest {
         if (!wishlistPage.isWishlistEmpty()) {
             wishlistPage.removeAllLists();
         }
-        MainPage mainPage = wishlistPage.goToHomePage();
-        ItemPage itemPage = mainPage.selectRandomItem();
+        HomePage homePage = wishlistPage.goToHomePage();
+        ItemPage itemPage = homePage.selectRandomItem();
         String itemAddedToWishListName = itemPage.getItemsName();
         itemPage.addToWishlist();
         wishlistPage = itemPage.goToMyAccountPage().goToWishListPage();
         wishlistPage.showList();
-        Assert.assertTrue(wishlistPage.checkIfItemWasAddedToWishlist(itemAddedToWishListName), "item was not added to wishlist");
+        Assert.assertTrue(wishlistPage.isItemInWishlist(itemAddedToWishListName), "item was not added to wishlist");
     }
 }

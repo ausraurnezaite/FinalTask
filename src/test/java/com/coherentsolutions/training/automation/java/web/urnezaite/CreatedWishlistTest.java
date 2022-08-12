@@ -13,14 +13,14 @@ public class CreatedWishlistTest extends BaseTest {
         MyAccountPage myAccountPage = logIn();
         WishlistPage wishlistPage = myAccountPage.goToWishListPage();
         wishlistPage.createNewWishlist(WISHLIST_NAME);
-        MainPage mainPage = wishlistPage.goToHomePage();
-        ItemPage itemPage = mainPage.selectRandomItem();
+        HomePage homePage = wishlistPage.goToHomePage();
+        ItemPage itemPage = homePage.selectRandomItem();
         String itemAddedToWishlistName = itemPage.getItemsName();
         itemPage.addToWishlist();
         wishlistPage = itemPage.goToMyAccountPage().goToWishListPage();
         wishlistPage.showCreatedList(WISHLIST_NAME);
 
-        Assert.assertTrue(wishlistPage.checkIfItemWasAddedToWishlist(itemAddedToWishlistName), "item was not added to created wishlist");
+        Assert.assertTrue(wishlistPage.isItemInWishlist(itemAddedToWishlistName), "item was not added to created wishlist");
     }
 
     @Test
@@ -29,18 +29,18 @@ public class CreatedWishlistTest extends BaseTest {
 
         WishlistPage wishlistPage = new WishlistPage(driver);
 
-        if (wishlistPage.isWishlistEmpty()) {
+        if (!wishlistPage.isWishlistEmpty()) {
             wishlistPage.removeAllLists();
         }
 
         wishlistPage.createNewWishlist(WISHLIST_NAME);
-        MainPage mainPage = wishlistPage.goToHomePage();
-        ItemPage itemPage = mainPage.selectRandomItem();
+        HomePage homePage = wishlistPage.goToHomePage();
+        ItemPage itemPage = homePage.selectRandomItem();
         String itemsAddedToWishlistName = itemPage.getItemsName();
         itemPage.addToWishlist();
         wishlistPage = itemPage.goToMyAccountPage().goToWishListPage();
         wishlistPage.showCreatedList(WISHLIST_NAME);
 
-        Assert.assertTrue(wishlistPage.checkIfItemWasAddedToWishlist(itemsAddedToWishlistName), "item was not added to created wishlist");
+        Assert.assertTrue(wishlistPage.isItemInWishlist(itemsAddedToWishlistName), "item was not added to created wishlist");
     }
 }

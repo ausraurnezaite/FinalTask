@@ -6,5 +6,6 @@
 /allure-report
 /allure-results
 /Screenshots
+/logs
 chromedriver.exe
 geckodriver.exe

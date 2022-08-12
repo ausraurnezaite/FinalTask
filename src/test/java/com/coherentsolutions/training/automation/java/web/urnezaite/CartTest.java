@@ -9,26 +9,24 @@ import java.util.List;
 
 public class CartTest extends BaseTest {
 
-    private List<String> itemsAddedToCart = new ArrayList<>();
-
     @Test
     @Description("Verify the ability to add to cart")
     public void testCart() {
         MyAccountPage myAccountPage = logIn();
+        HomePage homePage = myAccountPage.goToHomePage();
+        List<String> itemsAddedToCart = new ArrayList<>();
 
-        MainPage mainPage = myAccountPage.goToHomePage();
-        //adding 3 different random items to cart
         while (itemsAddedToCart.size() != 3) {
-            ItemPage itemPage = mainPage.selectRandomItem();
+            ItemPage itemPage = homePage.selectRandomItem();
             if (!itemsAddedToCart.contains(itemPage.getItemsReference())) {
                 String itemAddedToCart = itemPage.getItemsReference();
                 itemPage.addToCart();
                 itemsAddedToCart.add(itemAddedToCart);
-                mainPage = itemPage.goToHomePage();
+                homePage = itemPage.goToHomePage();
             }
         }
-        CartPage cartPage = mainPage.goToCartPage();
+        CartPage cartPage = homePage.goToCartPage();
 
-        Assert.assertTrue(cartPage.checkIfItemsWereAddedToCart(itemsAddedToCart), "items were not added to cart");
+        Assert.assertTrue(cartPage.isItemsInCart(itemsAddedToCart), "items were not added to cart");
     }
 }

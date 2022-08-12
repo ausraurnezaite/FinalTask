@@ -1,7 +1,8 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite;
 
 import com.coherentsolutions.training.automation.java.web.urnezaite.user.UserData;
-import com.coherentsolutions.training.automation.java.web.urnezaite.util.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,12 +51,14 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "submitAccount")
     private WebElement registerButton;
 
+    private final Logger logger = LogManager.getLogger(RegistrationPage.class);
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
 
     public MyAccountPage register(UserData user) {
-        Log.info(user.toString());
+        logger.info(user);
 
         if (user.getGender() == 1) {
             genderMRadio.click();

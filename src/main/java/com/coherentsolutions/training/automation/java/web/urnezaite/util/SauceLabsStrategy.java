@@ -1,5 +1,8 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.util;
 
+import com.coherentsolutions.training.automation.java.web.urnezaite.RegistrationPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,6 +17,7 @@ public class SauceLabsStrategy implements TestRunStrategy {
     private WebDriver driver;
     private MutableCapabilities sauceOptions = new MutableCapabilities();
     private DesiredCapabilities capabilities = new DesiredCapabilities();
+    private final Logger logger = LogManager.getLogger(SauceLabsStrategy.class);
 
 
     @Override
@@ -42,7 +46,7 @@ public class SauceLabsStrategy implements TestRunStrategy {
             driver = new RemoteWebDriver(sauceurl, capabilities);
 
         } catch (MalformedURLException e) {
-            Log.error(e.getMessage());
+            logger.error(e.getMessage());
         }
         return driver;
     }

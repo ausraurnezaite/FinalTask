@@ -1,5 +1,8 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.util;
 
+import com.coherentsolutions.training.automation.java.web.urnezaite.RegistrationPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -12,6 +15,7 @@ import java.net.URL;
 public class GridStrategy implements TestRunStrategy {
     private WebDriver driver;
     private DesiredCapabilities capabilities = new DesiredCapabilities();
+    private final Logger logger = LogManager.getLogger(GridStrategy.class);
 
 
     @Override
@@ -37,7 +41,7 @@ public class GridStrategy implements TestRunStrategy {
             driver = new RemoteWebDriver(gridUrl, capabilities);
 
         } catch (MalformedURLException e) {
-            Log.error(e.getMessage());
+            logger.error(e.getMessage());
         }
         return driver;
     }

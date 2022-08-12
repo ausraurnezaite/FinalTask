@@ -1,6 +1,7 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite;
 
-import com.coherentsolutions.training.automation.java.web.urnezaite.util.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,37 +19,31 @@ public class WishlistPage extends BasePage {
     private WebElement homeButton;
 
     @FindBy(id = "name")
-    WebElement newWishlistNameInput;
+    private WebElement newWishlistNameInput;
 
     @FindBy(id = "submitWishlist")
-    WebElement saveWishlist;
+    private WebElement saveWishlist;
 
 
     @FindBy(css = "table tr")
-    List<WebElement> wishlistLists;
+    private List<WebElement> wishlists;
 
     @FindBy(css = "ul.wlp_bought_list>li img")
-    List<WebElement> wishlistItems;
+    private List<WebElement> wishlistItems;
 
     @FindBy(css = "td.wishlist_delete>a.icon")
-    WebElement deleteWishlistIcon;
-
-    private final By deleteWishlistIconSelector = By.cssSelector("td.wishlist_delete>a.icon");
+    private List<WebElement> deleteWishlistIcons;
 
     private final String DEFAULT_WISHLIST_NAME = "My wishlist";
-
-    List<String> namesOfWishListItems = new ArrayList<>();
-
-    public boolean wishlistEmpty;
+    private final Logger logger = LogManager.getLogger(WishlistPage.class);
 
     public WishlistPage(WebDriver driver) {
         super(driver);
-        wishlistEmpty = wishlistLists.size() == 0;
     }
 
-    public MainPage goToHomePage() {
+    public HomePage goToHomePage() {
         homeButton.click();
-        return new MainPage(driver);
+        return new HomePage(driver);
     }
 
     public CartPage goToCartPage() {
@@ -57,17 +52,15 @@ public class WishlistPage extends BasePage {
     }
 
     public boolean isWishlistEmpty() {
-        return wishlistEmpty;
+        return wishlists.size() == 0;
     }
 
     public void removeAllLists() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        int numberOfLists = wishlistLists.size();
-        for (int i = numberOfLists; i > 0; i--) {
-            deleteWishlistIcon.click();
+        deleteWishlistIcons.forEach(element -> {
+            element.click();
             wait.until(ExpectedConditions.alertIsPresent()).accept();
-            wait.until(ExpectedConditions.numberOfElementsToBeLessThan(deleteWishlistIconSelector, i));
-        }
+        });
     }
 
     public void createNewWishlist(String wishlistName) {
@@ -83,11 +76,10 @@ public class WishlistPage extends BasePage {
         driver.findElement(By.xpath(String.format("//a[contains(text(), '%s')]", DEFAULT_WISHLIST_NAME))).click();
     }
 
-    public boolean checkIfItemWasAddedToWishlist(String itemsName) {
-        if (!wishlistEmpty) {
-            wishlistItems.forEach(item -> namesOfWishListItems.add(item.getAttribute("alt")));
-            Log.info("items in selected list: " + namesOfWishListItems);
-        }
+    public boolean isItemInWishlist(String itemsName) {
+        List<String> namesOfWishListItems = new ArrayList<>();
+        wishlistItems.forEach(item -> namesOfWishListItems.add(item.getAttribute("alt")));
+        logger.info("items in selected list: " + namesOfWishListItems);
         return namesOfWishListItems.contains(itemsName);
     }
 }

@@ -1,6 +1,7 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite;
 
-import com.coherentsolutions.training.automation.java.web.urnezaite.util.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,6 +36,8 @@ public class ItemPage extends BasePage {
     @FindBy(css = "p#product_reference>span")
     private WebElement itemsReferenceElement;
 
+    private final Logger logger = LogManager.getLogger(ItemPage.class);
+
 
     public ItemPage(WebDriver driver) {
         super(driver);
@@ -43,20 +46,20 @@ public class ItemPage extends BasePage {
     public void addToWishlist() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         addToWishlistButton.click();
-        Log.info("item added to wishlist: " + itemsNameElement.getText());
+        logger.info("item added to wishlist: " + itemsNameElement.getText());
         wait.until(ExpectedConditions.visibilityOf(closeButtonAfterAddingToWishlist)).click();
     }
 
     public void addToCart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         addToCartButton.click();
-        Log.info("item added to cart: " + itemsReferenceElement.getText());
+        logger.info("item added to cart: " + itemsReferenceElement.getText());
         wait.until(ExpectedConditions.visibilityOf(closeButtonAfterAddingToCart)).click();
     }
 
-    public MainPage goToHomePage() {
+    public HomePage goToHomePage() {
         homeButton.click();
-        return new MainPage(driver);
+        return new HomePage(driver);
     }
 
     public String getItemsReference() {

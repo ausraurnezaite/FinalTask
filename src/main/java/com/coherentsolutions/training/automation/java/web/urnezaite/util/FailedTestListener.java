@@ -1,7 +1,10 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.util;
 
+import com.coherentsolutions.training.automation.java.web.urnezaite.RegistrationPage;
 import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FailedTestListener implements IInvokedMethodListener {
     public static String screenshotsSubFolderName;
+    private static final Logger logger = LogManager.getLogger(FailedTestListener.class);
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult, ITestContext context) {
@@ -41,7 +45,7 @@ public class FailedTestListener implements IInvokedMethodListener {
         try {
             FileUtils.copyFile(scrFile, destFile);
         } catch (IOException e) {
-            Log.error(e.getMessage());
+           logger.error(e.getMessage());
         }
     }
 

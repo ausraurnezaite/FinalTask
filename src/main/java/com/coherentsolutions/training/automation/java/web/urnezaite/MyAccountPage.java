@@ -30,9 +30,9 @@ public class MyAccountPage extends BasePage {
         return new WishlistPage(driver);
     }
 
-    public MainPage goToHomePage() {
+    public HomePage goToHomePage() {
         homeButton.click();
-        return new MainPage(driver);
+        return new HomePage(driver);
     }
 
     public boolean isTitleCorrect() {
