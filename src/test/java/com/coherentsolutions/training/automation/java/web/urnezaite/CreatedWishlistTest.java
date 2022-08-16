@@ -8,10 +8,16 @@ public class CreatedWishlistTest extends BaseTest {
     private final String WISHLIST_NAME = "list";
 
     @Test
+    @Description("Verify the ability to log in")
+    public void testLogIn() {
+        MyAccountPage myAccountPage = logIn();
+        Assert.assertTrue(myAccountPage.isLoaded(), "log in was not successful");
+    }
+
+    @Test(dependsOnMethods = "testLogIn")
     @Description("Verify the ability to add to your Wishlist")
     public void testSelfCreatedWishlist() {
-        MyAccountPage myAccountPage = logIn();
-        WishlistPage wishlistPage = myAccountPage.goToWishListPage();
+        WishlistPage wishlistPage = new WishlistPage(driver);
         wishlistPage.createNewWishlist(WISHLIST_NAME);
         HomePage homePage = wishlistPage.goToHomePage();
         ItemPage itemPage = homePage.selectRandomItem();
@@ -23,7 +29,7 @@ public class CreatedWishlistTest extends BaseTest {
         Assert.assertTrue(wishlistPage.isItemInWishlist(itemAddedToWishlistName), "item was not added to created wishlist");
     }
 
-    @Test
+    @Test(dependsOnMethods = "testLogIn")
     @Description("Verify the ability to add to your Wishlist when no list were created before")
     public void testSelfCreatedWishlistWhenNoListWereCreatedBefore() {
 

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
 
-    public WebDriver driver;
+    protected WebDriver driver;
 
     @FindBy(xpath = "//a[@title = 'View my shopping cart']")
     protected WebElement cartButton;

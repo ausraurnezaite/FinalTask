@@ -46,11 +46,6 @@ public class WishlistPage extends BasePage {
         return new HomePage(driver);
     }
 
-    public CartPage goToCartPage() {
-        cartButton.click();
-        return new CartPage(driver);
-    }
-
     public boolean isWishlistEmpty() {
         return wishlists.size() == 0;
     }

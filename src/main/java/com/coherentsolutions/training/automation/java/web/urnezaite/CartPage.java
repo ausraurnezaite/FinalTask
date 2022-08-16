@@ -28,10 +28,11 @@ public class CartPage extends BasePage {
         return new HomePage(driver);
     }
 
-    public boolean isItemsInCart(List<String> itemsAddedToCart) {
-        List<String> namesOfItemsInCart = new ArrayList<>();
-        cartItems.forEach(item -> namesOfItemsInCart.add(item.getText().replace("SKU : ", "")));
-        logger.info("items in cart: " + namesOfItemsInCart);
-        return namesOfItemsInCart.containsAll(itemsAddedToCart);
+    public boolean isAddedItemsInCart() {
+        List<String> itemsAddedToCart = HomePage.getItemsAddedToCart();
+        List<String> namesOfActualItemsInCart = new ArrayList<>();
+        cartItems.forEach(item -> namesOfActualItemsInCart.add(item.getText().replace("SKU : ", "")));
+        logger.info("items in cart: " + namesOfActualItemsInCart);
+        return namesOfActualItemsInCart.containsAll(itemsAddedToCart);
     }
 }

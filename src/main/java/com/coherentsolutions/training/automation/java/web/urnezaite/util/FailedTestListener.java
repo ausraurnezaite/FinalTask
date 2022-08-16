@@ -1,6 +1,5 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.util;
 
-import com.coherentsolutions.training.automation.java.web.urnezaite.RegistrationPage;
 import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -20,14 +19,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FailedTestListener implements IInvokedMethodListener {
-    public static String screenshotsSubFolderName;
+    private static String screenshotsSubFolderName;
+    private static DateTimeFormatter DATE_TIME_FORMATTER_FULL = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+    private static DateTimeFormatter DATE_TIME_FORMATTER_SHORT = DateTimeFormatter.ofPattern("ddMMyyyy.HHmmss");
     private static final Logger logger = LogManager.getLogger();
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult, ITestContext context) {
         if (testResult.getStatus() == ITestResult.FAILURE) {
             WebDriver driver = DriverManager.getDriver();
-            captureScreenshot(testResult.getTestContext().getSuite().getName() + "_" + testResult.getTestContext().getName() + "_" + testResult.getName() + ".png", driver);
+            captureScreenshot(String.format("%s_%s_%s.png", testResult.getTestContext().getSuite().getName(), testResult.getTestContext().getName(), testResult.getName()), driver);
             Allure.addAttachment(testResult.getMethod().getMethodName(), new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
             addTestInfo();
         }
@@ -36,23 +37,21 @@ public class FailedTestListener implements IInvokedMethodListener {
     public static void captureScreenshot(String fileName, WebDriver driver) {
         if (screenshotsSubFolderName == null) {
             LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddMMyyy.HHmmss");
-            screenshotsSubFolderName = now.format(dtf);
+            screenshotsSubFolderName = now.format(DATE_TIME_FORMATTER_SHORT);
         }
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File destFile = new File("./Screenshots/" + screenshotsSubFolderName + "/" + fileName);
+        File destFile = new File(String.format("./Screenshots/%s/%s", screenshotsSubFolderName, fileName));
 
         try {
             FileUtils.copyFile(scrFile, destFile);
         } catch (IOException e) {
-           logger.error(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     public void addTestInfo() {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-        Allure.addAttachment("Time", now.format(dtf));
+        Allure.addAttachment("Time", now.format(DATE_TIME_FORMATTER_FULL));
         Allure.addAttachment("Browser", PropertyProvider.getProperty("browser"));
         if (!PropertyProvider.getProperty("env").equalsIgnoreCase("local")) {
             Allure.addAttachment("Browser.Version", PropertyProvider.getProperty("saucelabs.chrome.browser.version"));

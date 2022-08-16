@@ -4,25 +4,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class MyAccountPage extends BasePage {
 
     private static final String TITLE = "My account - My Store";
 
-    @FindBy(css = "a.account>span")
-    private WebElement usersName;
-
-    @FindBy(xpath = "//a[@title = 'My wishlists']")
-    private WebElement wishListButton;
-
     @FindBy(css = "a.home")
     private WebElement homeButton;
+
+    @FindBy(css = "a.account>span")
+    private List<WebElement> usersName;
+
+    @FindBy(xpath = "//a[@title = 'My wishlists']")
+    private List<WebElement> wishListButton;
+
+    @FindBy(xpath = "//a[@title = 'View my shopping cart']")
+    protected List<WebElement> cartButton;
 
     public MyAccountPage(WebDriver driver) {
         super(driver);
     }
 
     public WishlistPage goToWishListPage() {
-        wishListButton.click();
+        wishListButton.get(0).click();
         return new WishlistPage(driver);
     }
 
@@ -31,19 +36,23 @@ public class MyAccountPage extends BasePage {
         return new HomePage(driver);
     }
 
+    public boolean isLoaded() {
+        return isTitleCorrect() && isCartButtonDisplayed() && isWishListButtonDisplayed() && isUsersNameDisplayed();
+    }
+
     public boolean isTitleCorrect() {
         return TITLE.equals(driver.getTitle());
     }
 
     public boolean isCartButtonDisplayed() {
-        return cartButton.isDisplayed();
+        return cartButton.size() > 0;
     }
 
     public boolean isWishListButtonDisplayed() {
-        return wishListButton.isDisplayed();
+        return wishListButton.size() > 0;
     }
 
     public boolean isUsersNameDisplayed() {
-        return usersName.isDisplayed();
+        return usersName.size() > 0;
     }
 }

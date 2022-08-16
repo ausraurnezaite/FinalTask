@@ -7,14 +7,22 @@ import org.testng.annotations.Test;
 public class AutoWishlistTest extends BaseTest {
 
     @Test
+    @Description("Verify the ability to log in")
+    public void testLogIn() {
+        MyAccountPage myAccountPage = logIn();
+        Assert.assertTrue(myAccountPage.isLoaded(), "log in was not successful");
+    }
+
+    @Test(dependsOnMethods = "testLogIn")
     @Description("Verify the ability to add to auto-created Wishlist")
     public void testAutoCreatedWishlist() {
-        MyAccountPage myAccountPage = logIn();
-        WishlistPage wishlistPage = myAccountPage.goToWishListPage();
+
+        WishlistPage wishlistPage = new WishlistPage(driver);
 
         if (!wishlistPage.isWishlistEmpty()) {
             wishlistPage.removeAllLists();
         }
+
         HomePage homePage = wishlistPage.goToHomePage();
         ItemPage itemPage = homePage.selectRandomItem();
         String itemAddedToWishListName = itemPage.getItemsName();
