@@ -16,7 +16,8 @@ public class CartTest extends BaseTest {
     @Test(dependsOnMethods = "testLogIn")
     @Description("Verify the ability to add to cart")
     public void testCart() {
-        HomePage homePage = new HomePage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        HomePage homePage = myAccountPage.goToHomePage();
         homePage.addProductsToCart(3);
         CartPage cartPage = homePage.goToCartPage();
 

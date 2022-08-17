@@ -17,7 +17,9 @@ public class CreatedWishlistTest extends BaseTest {
     @Test(dependsOnMethods = "testLogIn")
     @Description("Verify the ability to add to your Wishlist")
     public void testSelfCreatedWishlist() {
-        WishlistPage wishlistPage = new WishlistPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        WishlistPage wishlistPage = myAccountPage.goToWishListPage();
+
         wishlistPage.createNewWishlist(WISHLIST_NAME);
         HomePage homePage = wishlistPage.goToHomePage();
         ItemPage itemPage = homePage.selectRandomItem();

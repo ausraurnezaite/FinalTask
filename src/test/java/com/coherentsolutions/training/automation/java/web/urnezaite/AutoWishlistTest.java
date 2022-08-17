@@ -16,8 +16,8 @@ public class AutoWishlistTest extends BaseTest {
     @Test(dependsOnMethods = "testLogIn")
     @Description("Verify the ability to add to auto-created Wishlist")
     public void testAutoCreatedWishlist() {
-
-        WishlistPage wishlistPage = new WishlistPage(driver);
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        WishlistPage wishlistPage = myAccountPage.goToWishListPage();
 
         if (!wishlistPage.isWishlistEmpty()) {
             wishlistPage.removeAllLists();

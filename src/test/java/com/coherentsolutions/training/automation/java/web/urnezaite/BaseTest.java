@@ -17,7 +17,6 @@ public class BaseTest {
     protected final static String USERNAME = PropertyProvider.getProperty("username");
     protected final static String PASSWORD = System.getenv("TEST_PASSWORD");
     protected final static String LOGIN_PAGE_LINK = PropertyProvider.getProperty("loginPageLink");
-    private static final Logger logger = LogManager.getLogger();
 
     @BeforeClass
     public void setUp(ITestContext context) {
