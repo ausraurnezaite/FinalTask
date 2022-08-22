@@ -1,8 +1,8 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.util;
 
-import com.coherentsolutions.training.automation.java.web.urnezaite.RegistrationPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -23,16 +23,16 @@ public class GridStrategy implements TestRunStrategy {
 
         if (browserName.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
+            options.setBrowserVersion(PropertyProvider.getProperty("grid.firefox.browser.version"));
             capabilities.setBrowserName("firefox");
             capabilities.setCapability("platformName", PropertyProvider.getProperty("grid.firefox.browser.platform"));
-            capabilities.setCapability("browserVersion", PropertyProvider.getProperty("grid.firefox.browser.version"));
 
             options.merge(capabilities);
         } else {
             ChromeOptions options = new ChromeOptions();
+            options.setBrowserVersion(PropertyProvider.getProperty("grid.chrome.browser.version"));
             capabilities.setBrowserName("chrome");
-            capabilities.setCapability("platformName", PropertyProvider.getProperty("grid.chrome.browser.platform"));
-            capabilities.setCapability("browserVersion", PropertyProvider.getProperty("grid.chrome.browser.version"));
+            capabilities.setPlatform(Platform.fromString(PropertyProvider.getProperty("grid.chrome.browser.platform")));
             options.merge(capabilities);
         }
 

@@ -1,6 +1,5 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.user;
 
-
 public class UserData {
     private int gender;
     private String firstName;

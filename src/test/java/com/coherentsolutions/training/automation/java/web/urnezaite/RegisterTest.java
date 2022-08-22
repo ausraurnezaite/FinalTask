@@ -12,7 +12,6 @@ public class RegisterTest extends BaseTest {
     @Test
     @Description("Verify the ability to create an account")
     public void testRegistration() {
-
         LogInPage logInPage = new LogInPage(driver);
         logInPage.load(LOGIN_PAGE_LINK);
         RegistrationPage registrationPage = logInPage.createAccount(USERNAME);

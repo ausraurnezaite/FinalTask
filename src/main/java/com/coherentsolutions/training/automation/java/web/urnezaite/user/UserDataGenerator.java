@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 public class UserDataGenerator {
     private static UserData userData;
     private static Faker faker = new Faker();
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy");
     private static String[] date = sdf.format(faker.date().birthday(18, 100)).split("/");
 
     public static UserData generate() {
@@ -39,22 +39,16 @@ public class UserDataGenerator {
         return faker.name().lastName();
     }
 
-    private static String shortenDate(String number){
-        int i = Integer.parseInt(number);
-        return String.valueOf(i);
-
-    }
-
     private static String getRandomBirthDay() {
-        return shortenDate(date[0]);
+        return date[0];
     }
 
     private static String getRandomBirthMonth() {
-        return shortenDate(date[1]);
+        return date[1];
     }
 
     private static String getRandomBirthYear() {
-        return shortenDate(date[2]);
+        return date[2];
     }
 
     private static String getRandomAddress() {

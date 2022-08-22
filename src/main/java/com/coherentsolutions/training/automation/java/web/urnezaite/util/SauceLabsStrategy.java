@@ -1,6 +1,5 @@
 package com.coherentsolutions.training.automation.java.web.urnezaite.util;
 
-import com.coherentsolutions.training.automation.java.web.urnezaite.RegistrationPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
