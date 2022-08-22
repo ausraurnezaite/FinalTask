@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Auto-created Wishlist">
+    <test name="Auto-created  Wishlist Test">
+        <classes>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.AutoWishlistTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Created Wishlist">
+    <test preserve-order="true"
+          name="Created Wishlist Test">
+        <classes>
+            <class name="com.coherentsolutions.training.automation.java.web.urnezaite.CreatedWishlistTest"/>
+        </classes>
+    </test>
+</suite>
